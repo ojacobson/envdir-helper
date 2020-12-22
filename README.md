@@ -36,3 +36,7 @@ Some familiarity with Python is assumed, here:
 * Make a virtual environment;
 * `$VIRTUALENV/bin/pip install git+https://github.com/ojacobson/envdir-helper/#egg=envdir-helper`; and
 * Add its `bin` directory to `PATH` by other means, or invoke it by full path.
+
+## Development
+
+I use [`direnv`] to manage development. The configuration in `.envrc` will automatically create a virtual Python environment using your current Python version, and load it, once the configuration is allowed. See the `direnv` documentation for details.

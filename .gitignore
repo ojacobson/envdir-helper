@@ -1,3 +1,7 @@
+# If you're using direnv, the .envrc file will generate .direnv automatically
+# when loaded.
+/.direnv/
+
 # Generated metadata created by `pip install`, `setup.py sdist`, and friends.
 # Will be reconstituted from setup.py as needed.
 *.egg-info
