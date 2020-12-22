@@ -9,6 +9,7 @@ import subprocess as sp
 
 @click.command()
 @click.pass_context
+@click.version_option()
 @click.argument(
     "envdir",
     default=pathlib.Path.home() / ".envdir",

@@ -1,2 +1,11 @@
+# Generated metadata created by `pip install`, `setup.py sdist`, and friends.
+# Will be reconstituted from setup.py as needed.
 *.egg-info
+
+# Compiled Python bytecode. Will be regenerated on import, for the current
+# Python version.
 *.pyc
+
+# Dependencies installed via setup_requires; will be recreated from setuptools
+# as needed.
+/.eggs/
