@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+cd "$(dirname "$0")/.."
+
+## tools/check-lint
+##
+## Run lint checks on the project, exiting with a zero status if there are no lint
+## issues.
+
+exec pylint envdir
