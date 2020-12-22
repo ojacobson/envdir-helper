@@ -39,4 +39,10 @@ Some familiarity with Python is assumed, here:
 
 ## Development
 
-I use [`direnv`] to manage development. The configuration in `.envrc` will automatically create a virtual Python environment using your current Python version, and load it, once the configuration is allowed. See the `direnv` documentation for details.
+I use [pyenv] and [`direnv`] to manage development. The configuration in
+`.envrc` will automatically create a virtual Python environment using Pyenv (if
+possible) or your current Python version (otherwise), and load it, once the
+configuration is allowed. See the `direnv` documentation and the included
+`.envrc` script for details.
+
+[pyenv]: https://github.com/pyenv/pyenv
