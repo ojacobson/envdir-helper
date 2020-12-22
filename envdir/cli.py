@@ -10,12 +10,17 @@ import subprocess as sp
 @click.command()
 @click.pass_context
 @click.version_option()
+@click.option(
+    "--export/--no-export",
+    default=None,
+    help="Export generated environment variables [default: --export]",
+)
 @click.argument(
     "envdir",
-    default=pathlib.Path.home() / ".envdir",
+    default=str(pathlib.Path.home() / ".envdir"),
     metavar="DIR",
 )
-def main(context, envdir):
+def main(context, export, envdir):
     r"""Load environment variables from DIR (or ~/.envdir).
 
     For each non-directory entry in DIR, this will output a brief shell script
@@ -40,12 +45,30 @@ def main(context, envdir):
         stderr = click.get_text_stream("stderr")
         click.echo(f"{context.info_name}: skipping {path}: {reason}", file=stderr)
 
+    if export is None:
+        env_script = detect_env_script(
+            envdir, rc=no_export_env_script, default=export_env_script
+        )
+    elif export:
+        env_script = export_env_script
+    else:
+        env_script = no_export_env_script
+
     for name, content in walk_entries(envdir, on_skipped=warn_on_skipped):
         script = env_script(name, content)
         click.echo(script)
 
 
-def env_script(name, content):
+def detect_env_script(path, rc, default):  # pylint: disable=invalid-name
+    """Detect which of two values to use based on whether `path` ends with
+    `"rc"`. If it does, returns `rc`; otherwise, returns `default`.
+    """
+    if path.endswith("rc"):
+        return rc
+    return default
+
+
+def export_env_script(name, content):
     """Given a name and contents, generate a shell script that will set and
     export the corresponding environment variable, with that content."""
     # use sh-friendly syntax here: don't assume `export` can have assignment
@@ -54,6 +77,14 @@ def env_script(name, content):
     qname = shlex.quote(name)
     qcontent = shlex.quote(content)
     return f"{qname}={qcontent}; export {qname}"
+
+
+def no_export_env_script(name, content):
+    """Given a name and contents, generate a shell script that will set and NOT
+    export the corresponding environment variable, with that content."""
+    qname = shlex.quote(name)
+    qcontent = shlex.quote(content)
+    return f"{qname}={qcontent}"
 
 
 def walk_entries(envdir, on_skipped):

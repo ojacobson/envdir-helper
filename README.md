@@ -12,6 +12,12 @@ I've replaced all of that with a single line:
 
     eval "$(envdir-helper)"
 
+This program also supports setting non-exported shell variables, using the
+`--no-export` flag. This is useful for prompts and other shell configuration
+that should not be propagated through to subshells and other programs. This behaviour is the default if the env directory's name ends in `rc`:
+
+    eval "$(envdir-helper .envdir.rc)"
+
 ## Security
 
 As alluded to above, one of the use cases for this is env-specific tokens. These
