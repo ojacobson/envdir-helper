@@ -13,8 +13,9 @@ I've replaced all of that with a single line:
     eval "$(envdir-helper)"
 
 This program also supports setting non-exported shell variables, using the
-`--no-export` flag. This is useful for prompts and other shell configuration
-that should not be propagated through to subshells and other programs. This behaviour is the default if the env directory's name ends in `rc`:
+`--export false` flag. This is useful for prompts and other shell configuration
+that should not be propagated through to subshells and other programs. This
+behaviour is the default if the env directory's name ends in `rc`:
 
     eval "$(envdir-helper .envdir.rc)"
 
@@ -37,18 +38,6 @@ This program does relatively little to manage this directly. One approach that h
 
 ## Installation
 
-Some familiarity with Python is assumed, here:
+Some familiarity with Rust is assumed, here:
 
-* Make a virtual environment;
-* `$VIRTUALENV/bin/pip install git+https://github.com/ojacobson/envdir-helper/#egg=envdir-helper`; and
-* Add its `bin` directory to `PATH` by other means, or invoke it by full path.
-
-## Development
-
-I use [pyenv] and [`direnv`] to manage development. The configuration in
-`.envrc` will automatically create a virtual Python environment using Pyenv (if
-possible) or your current Python version (otherwise), and load it, once the
-configuration is allowed. See the `direnv` documentation and the included
-`.envrc` script for details.
-
-[pyenv]: https://github.com/pyenv/pyenv
+* `cargo install --git https://github.com/ojacobson/envdir-helper`

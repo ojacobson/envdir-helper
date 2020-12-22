@@ -1,0 +1,11 @@
+[package]
+name = "envdir-helper"
+version = "0.2.0"
+authors = ["Owen Jacobson <owen@grimoire.ca>"]
+edition = "2018"
+
+[dependencies]
+clap = "~3.0.0-beta.2"
+libc = "~0.2.40"
+shlex = "~0.1.1"
+thiserror = "~1.0"
