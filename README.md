@@ -40,4 +40,4 @@ This program does relatively little to manage this directly. One approach that h
 
 Some familiarity with Rust is assumed, here:
 
-* `cargo install --git https://github.com/ojacobson/envdir-helper`
+* `cargo install --git https://github.com/ojacobson/envdir-helper --branch main`
